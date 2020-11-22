@@ -16,7 +16,8 @@ async function getByEmail (email) {
 }
 
 async function save (body) {
-  body.passwordEncrypted = body.password;
+  if(!body.passwordEncrypted)
+    body.passwordEncrypted = body.password;
   const user = new User(body);
   const resp = await user.save();
   console.log(JSON.stringify(resp));

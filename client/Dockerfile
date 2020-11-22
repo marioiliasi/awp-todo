@@ -9,7 +9,7 @@ RUN node -v
 RUN npm install -g @angular/cli
 RUN npm install -g typescript
 
-ADD frontend /frontend
+ADD frontend/frontend /frontend
 WORKDIR /frontend
 
 RUN npm install
