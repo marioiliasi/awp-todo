@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+﻿import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: '' }
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);
