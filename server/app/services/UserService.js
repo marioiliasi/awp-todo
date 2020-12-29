@@ -1,4 +1,5 @@
 const { User } = require("../models/user");
+const jwt = require('jsonwebtoken');
 
 async function getById (id) {
   const user =  await User.findById(id);
@@ -15,6 +16,8 @@ async function getByEmail (email) {
 }
 
 async function save (body) {
+  if(!body.passwordEncrypted)
+    body.passwordEncrypted = body.password;
   const user = new User(body);
   const resp = await user.save();
   console.log(JSON.stringify(resp));
@@ -40,10 +43,24 @@ async function deleteById(id) {
   return resp;
 }
 
+async function authenticate(body) {
+  const user = await getByEmail(body.email);
+  if(!user || !user.length || !user[0]._doc){
+    throw new Error("No user found for that email");
+  }
+  const userDoc = user[0]._doc;
+  if(userDoc.passwordEncrypted === body.password){
+    userDoc.token = jwt.sign(body, 'test');
+    return userDoc;
+  }
+  throw new Error("Invalid password");
+}
+
 module.exports = {
   getByEmail,
   getById,
   update,
   save,
-  deleteById
+  deleteById,
+  authenticate
 };

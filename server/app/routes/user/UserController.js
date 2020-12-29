@@ -66,5 +66,19 @@ module.exports = {
       console.error(error);
       res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
     }
-  }
+  },
+
+  authenticate: async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(ValidationError).send(responseHandler.errorResponse(ValidationError));
+    }
+    try {
+      let result = await userService.authenticate(req.body);
+      res.status(Ok).send(responseHandler.successResponse(Ok, "Token generated", result));
+    } catch (error) {
+      console.error(error);
+      res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+    }
+  },
 };

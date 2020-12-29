@@ -23,6 +23,11 @@ module.exports = (app) => {
       UserController.deleteUser
     );
 
+  router.route('/authenticate')
+    .post(
+      UserController.authenticate
+    );
+
   app.use(
     RouteConstant.USER,
     router,
