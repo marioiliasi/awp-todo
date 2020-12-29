@@ -17,6 +17,10 @@ export class AppComponent {
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
 
+  setTab(tabname: string) {
+    this.router.navigate([`/${tabname}`]);
+  }
+
     logout() {
         this.authenticationService.logout();
         this.router.navigate(['/login']);

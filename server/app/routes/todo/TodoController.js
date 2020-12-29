@@ -19,6 +19,21 @@ module.exports = {
     }
   },
 
+  getArchivedTodoTasksByUserId: async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(ValidationError).send(responseHandler.errorResponse(ValidationError));
+    }
+    let params = req.params;
+    try {
+      let result = await todoService.getArchivedTasksByUserId(params.userId);
+      res.status(Ok).send(responseHandler.successResponse(Ok, "Todo retrieved", result));
+    } catch (error) {
+      console.error(error);
+      res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+    }
+  },
+
   getTodoTaskById: async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

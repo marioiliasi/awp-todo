@@ -8,6 +8,12 @@ module.exports = (app) => {
       TodoController.getTodoTasksByUserId
     );
 
+  router.route(`/:userId${RouteConstant.TODO}s/archived`)
+    .get(
+      TodoController.getArchivedTodoTasksByUserId
+    );
+
+
   router.route(`/:userId${RouteConstant.TODO}/:taskId`)
     .get(
       TodoController.getTodoTaskById

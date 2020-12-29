@@ -38,7 +38,18 @@ async function buildTaskModel(userId, task){
 async function getTasksByUserId(userId) {
   const todo =  await TodoTask.find({
     userId: userId,
-    deleted: false
+    deleted: false,
+    archived: false
+  });
+  console.log(JSON.stringify(todo));
+  return todo;
+}
+
+async function getArchivedTasksByUserId(userId) {
+  const todo =  await TodoTask.find({
+    userId: userId,
+    deleted: false,
+    archived: true
   });
   console.log(JSON.stringify(todo));
   return todo;
@@ -100,6 +111,7 @@ async function deleteTasksByUserId (id) {
 module.exports = {
   getTaskById,
   getTasksByUserId,
+  getArchivedTasksByUserId: getArchivedTasksByUserId,
   saveTask,
   updateTask,
   deleteTask,

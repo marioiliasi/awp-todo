@@ -1,0 +1,17 @@
+﻿<form class="form-inline waves-light">
+  <div class="md-form mt-0">
+    <input class="form-control mr-sm-2" type="text" (keyup.enter)="search($event.target.value)" placeholder="Search" style="width:2000px">
+  </div>
+</form>
+<div class="container">
+  <form class="add-todo-form">
+    <input class="todo-text" name="title" type="text" [(ngModel)]="todo.title" placeholder="Title"/>
+    <textarea class="todo-text" name="content" cols="30" rows="10" [(ngModel)]="todo.items" placeholder="Content.."></textarea>
+    <button class="btn-add" type="button" (click)="addTodo()">Add Todo</button>
+  </form>
+  <ul class="list">
+    <li class="todo-item" *ngFor="let todo of todoList">
+      <app-todo [todo]="todo"></app-todo>
+    </li>
+  </ul>
+</div>

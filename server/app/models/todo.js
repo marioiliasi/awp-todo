@@ -10,7 +10,7 @@ const toDoItemSchema = new mongoose.Schema(
         },
         order: {
             type: Number,
-            required: true,
+            required: false,
         },
         completed: {
             type: Boolean,
