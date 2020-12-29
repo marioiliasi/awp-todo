@@ -16,6 +16,8 @@ export class OpenComponent implements OnInit {
 
   }
 
+  public selectedOrder: string = 'asc';
+
   public todo: Todo = {
     _id: "",
     archived: false,
@@ -48,6 +50,7 @@ export class OpenComponent implements OnInit {
       (err) => console.log(err),
       () => console.log('done!'));
     // this.todo = this.child.selectedTodo;
+    this.sortAsc();
   }
 
   public addTodo(){
@@ -79,4 +82,20 @@ export class OpenComponent implements OnInit {
     }
   }
 
+  public sort(){
+    // console.log(event);
+    if(this.selectedOrder.includes('asc')){
+      this.sortAsc();
+    } else{
+      this.sortDesc();
+    }
+  }
+
+  public sortAsc(){
+    this.todoList.sort((a, b) => (a.title > b.title ? 1 : -1));
+  }
+
+  public sortDesc(){
+    this.todoList.sort((a, b) => (a.title < b.title ? 1 : -1));
+  }
 }

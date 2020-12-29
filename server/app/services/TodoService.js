@@ -42,6 +42,7 @@ async function getTasksByUserId(userId) {
     archived: false
   });
   console.log(JSON.stringify(todo));
+  todo.sort((a, b) => (a.title > b.title ? 1 : -1));
   return todo;
 }
 
@@ -52,6 +53,7 @@ async function getArchivedTasksByUserId(userId) {
     archived: true
   });
   console.log(JSON.stringify(todo));
+  todo.sort((a, b) => (a.title > b.title ? 1 : -1));
   return todo;
 }
 
