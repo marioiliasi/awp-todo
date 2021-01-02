@@ -8,7 +8,7 @@ import {ClosedComponent} from "@/closedTasks";
 import {OpenComponent} from "@/openTasks";
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: '', component: OpenComponent, canActivate: [AuthGuard] },
     { path: 'closed', component: ClosedComponent, canActivate: [AuthGuard] },
     { path: 'open', component: OpenComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },

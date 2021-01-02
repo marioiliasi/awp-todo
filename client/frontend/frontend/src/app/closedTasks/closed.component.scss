@@ -46,7 +46,7 @@ header {
     background: #DFDFDF;
     & > li.todo-item {
       padding: 8px;
-
+      white-space: pre-wrap;
     }
   }
 

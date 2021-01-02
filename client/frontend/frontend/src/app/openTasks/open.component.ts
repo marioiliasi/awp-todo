@@ -92,10 +92,10 @@ export class OpenComponent implements OnInit {
   }
 
   public sortAsc(){
-    this.todoList.sort((a, b) => (a.title > b.title ? 1 : -1));
+    this.todoList.sort((a, b) => (a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1));
   }
 
   public sortDesc(){
-    this.todoList.sort((a, b) => (a.title < b.title ? 1 : -1));
+    this.todoList.sort((a, b) => (a.title.toUpperCase() < b.title.toUpperCase() ? 1 : -1));
   }
 }

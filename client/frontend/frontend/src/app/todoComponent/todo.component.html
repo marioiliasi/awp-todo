@@ -1,5 +1,10 @@
 ﻿<div class="todo">
-  <h4 class="title">{{todo.title}}</h4>
+  <h4 class="title" *ngIf="canEdit">
+    <textarea class="todo-text" name="content" cols="30" rows="1" [(ngModel)]="todo.title"></textarea>
+  </h4>
+  <h4 class="title" *ngIf="canEdit === false">
+    <span>{{todo.title}}</span>
+  </h4>
   <div class="content">
     <div *ngFor="let item of todo.items;">
       <div *ngIf="todo.type !== 'checkbox'">
@@ -18,6 +23,9 @@
   <div *ngIf="todo.archived" class="action">
     <button class="btn-action btn-delete" (click)="reopen()">
       Reopen
+    </button>
+    <button class="btn-action btn-delete" (click)="delete()">
+      Delete
     </button>
   </div>
   <div *ngIf="!todo.archived" class="action">
