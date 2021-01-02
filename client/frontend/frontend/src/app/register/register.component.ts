@@ -56,7 +56,11 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    if(error === 'Conflict'){
+                      alert("The email is already taken");
+                    } else{
+                      alert(error);
+                    }
                     this.loading = false;
                 });
     }

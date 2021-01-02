@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const userService = require('../../services/UserService');
 const todoService = require('../../services/TodoService');
 const responseHandler = require('../../cors/responseHandler');
-const { Ok, InternalServerError, ValidationError } = require('../../constant/HttpStatusCode');
+const { Ok, InternalServerError, ValidationError, Unauthorized, Conflict } = require('../../constant/HttpStatusCode');
 
 module.exports = {
   getUserByEmail: async (req, res) => {
@@ -30,7 +30,11 @@ module.exports = {
       res.status(Ok).send(responseHandler.successResponse(Ok, "User saved", result));
     } catch (error) {
       console.error(error);
-      res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+      if(error.message === 'User already exists'){
+        res.status(Conflict).send(responseHandler.errorResponse(Conflict));
+      } else {
+        res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+      }
     }
   },
 
@@ -78,7 +82,11 @@ module.exports = {
       res.status(Ok).send(responseHandler.successResponse(Ok, "Token generated", result));
     } catch (error) {
       console.error(error);
-      res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+      if(error.message === 'No user found for that email' || error.message === 'Invalid password'){
+        res.status(Unauthorized).send(responseHandler.errorResponse(Unauthorized));
+      } else {
+        res.status(InternalServerError).send(responseHandler.errorResponse(InternalServerError))
+      }
     }
   },
 };

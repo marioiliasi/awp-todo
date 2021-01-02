@@ -4,6 +4,7 @@ module.exports = {
     Forbidden: 403,
     Unauthorized: 401,
     ValidationError: 401,
+    Conflict: 409,
     InternalServerError: 500,
     NotFound: 404,
     UnprocessableEntity: 422,

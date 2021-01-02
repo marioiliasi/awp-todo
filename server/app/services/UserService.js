@@ -16,6 +16,10 @@ async function getByEmail (email) {
 }
 
 async function save (body) {
+  const foundUser = this.getByEmail(body.email);
+  if(foundUser){
+    throw new Error("User already exists");
+  }
   if(!body.passwordEncrypted)
     body.passwordEncrypted = body.password;
   const user = new User(body);

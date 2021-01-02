@@ -57,7 +57,12 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    if(error === 'Unauthorized'){
+                      alert("Invalid credentials");
+                    } else{
+                      alert(error);
+                    }
+
                     this.loading = false;
                 });
     }
